@@ -95,7 +95,7 @@
         <div class="gallery-wrap">
           <img src="/wh/assets/img/sample_img_red.jpg" class="img-fluid" alt="">
           <div class="gallery-info">
-            <p>{{$column->name}}</p>
+            <p>SKU : {{$column->sku}}</p>
 
             <div class="gallery-links">
                 <a href="javascript:addtocart({{$column->sku}})" title="{{$column->name}}"><i class="bx bx-cart" style="font-size:100px"></i></a>
