@@ -116,7 +116,7 @@
           @endphp
           {{ \Illuminate\Support\Str::substr($column->description,0,50) }}  
           @if( $SLen > 50 )
-          ...          
+          <span class="moretip">...  <span class="tip">{{$column->description}}</span></span>     
           @else
           @endif
           </p>
@@ -139,6 +139,47 @@
   @include('wh.theshop_footer')  
 
 </body>
+<style>
+.moretip {
+    position: relative;
+    display: inline-block;
+}
+
+.moretip .tip {
+    visibility: hidden;
+    width: 200px;
+    background: #333;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+    border-radius: 7px;
+ 
+    position: absolute;
+    z-index: 1;
+    top: -10px;
+    left: 120%;
+
+    opacity: 0;
+}
+
+.moretip .tip::after {
+    content: "";
+    position: absolute;
+    border-top: 6px solid transparent;
+    border-right: 6px solid #333;
+    border-bottom: 6px solid transparent;
+    border-left: 6px solid transparent;
+    top: 31%;
+    right: 100%;
+}
+
+.moretip:hover .tip {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.7s;
+}
+</style>
 <script>
 function addtocart(sku)
 {
