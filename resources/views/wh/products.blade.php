@@ -111,7 +111,14 @@
           </div>
 
           <p>
+          @php
+          $SLen = strlen($column->description);
+          @endphp
           {{ \Illuminate\Support\Str::substr($column->description,0,50) }}  
+          @if( $SLen > 50 )
+          ...          
+          @else
+          @endif
           </p>
           <div class="trainer d-flex justify-content-between align-items-center">
           </div>
