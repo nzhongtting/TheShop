@@ -63,8 +63,7 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                 <li class="dropdown-header">
-                <h6>{{ Auth::user()->name }}</h6>
-                <span>Web Developer</span>
+                <h6>User Name : {{ Auth::user()->name }}</h6>
                 </li>
 
                 <li>
