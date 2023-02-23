@@ -116,7 +116,7 @@
           @endphp
           {{ \Illuminate\Support\Str::substr($column->description,0,50) }}  
           @if( $SLen > 50 )
-          <span class="moretip">...  <span class="tip">{{$column->description}}</span></span>     
+          <span class="moretip" data-bs-toggle="modal" data-bs-target="#smallModal" >...   <span class="tip">{{$column->description}}</span></span>     
           @else
           @endif
           </p>
@@ -156,7 +156,7 @@
     border-radius: 7px;
  
     position: absolute;
-    z-index: 1;
+    z-index: 10;
     top: -10px;
     left: 120%;
 
