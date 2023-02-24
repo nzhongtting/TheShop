@@ -25,7 +25,7 @@ class AdmPageController extends Controller
      */
     public function index(Request $request)
     {
-		if (Auth::check() && Auth::user()->id == '1' )
+		if (Auth::check())
 		{        
 		$uri = $request->path();
         return view('wh.adm.firstPage',compact('uri'));
@@ -38,7 +38,7 @@ class AdmPageController extends Controller
     
     public function listProducts(Request $request)
     {
-		if (Auth::check() && Auth::user()->id == '1' )
+		if (Auth::check())
 		{
             $test = ProductsCRUD::orderBy('sku','desc')->paginate(10);
             $uri = $request->path();
@@ -52,7 +52,7 @@ class AdmPageController extends Controller
 
     public function createProducts(Request $request)
     {
-		if (Auth::check() && Auth::user()->id == '1' )
+		if (Auth::check())
 		{
             $uri = $request->path();
             return view('wh.adm.createProducts',compact('test','uri'));
@@ -65,7 +65,7 @@ class AdmPageController extends Controller
 
     public function insertProducts(Request $request)
     {
-		if (Auth::check() && Auth::user()->id == '1' )
+		if (Auth::check())
 		{
             $save_table = new ProductsCRUD ;
             $save_table->name = $request-> input('pro_name');
@@ -84,7 +84,7 @@ class AdmPageController extends Controller
     public function productAdmEdit($Id)
 	{
 
-		if (Auth::check() && Auth::user()->id == '1' )
+		if (Auth::check())
 		{
 
 			$test = ProductsCRUD::where('sku', $Id)->firstOrFail();
@@ -100,7 +100,7 @@ class AdmPageController extends Controller
 
 	public function productUpdate(Request $request)
 	{
-		if (Auth::check() && Auth::user()->id == '1' )
+		if (Auth::check())
 		{
             $id		= $request-> input('pro_sku');
             $affected = DB::table('products_tab')
@@ -116,7 +116,7 @@ class AdmPageController extends Controller
 
     public function listDetailCart($Id)
     {
-		if (Auth::check() && Auth::user()->id == '1' )
+		if (Auth::check())
 		{
             $test1 = OrderCRUD::where('order_no', $Id)->firstOrFail();
             $test2 = CartCRUD::where('checkoutNo', $Id)->orderBy('id','desc')->paginate(1000);
@@ -133,7 +133,7 @@ class AdmPageController extends Controller
 
     public function listCart(Request $request)
     {
-		if (Auth::check() && Auth::user()->id == '1' )
+		if (Auth::check())
 		{
             $test = CartCRUD::orderBy('id','desc')->paginate(10);
             $uri = $request->path();

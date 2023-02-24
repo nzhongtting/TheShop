@@ -33,7 +33,7 @@ class CartController extends Controller
     public function index()
     {
 
-		if (Auth::check() && Auth::user()->id == '1' )
+		if (Auth::check())
 		{          
             $test = CartCRUD::orderBy('id','desc')->where('username', '=', Auth::user()->email )->whereNull('checkoutNo')->paginate(1000);
 
@@ -53,7 +53,7 @@ class CartController extends Controller
 
     public function removeCart(Request $request)
     {
-		if (Auth::check() && Auth::user()->id == '1' )
+		if (Auth::check())
 		{        
             //dd('test'.$request['id']);
             CartCRUD::where('id', $request['id'])->delete();
@@ -74,7 +74,7 @@ class CartController extends Controller
     public function cartCheckOut(Request $request)
     {
 
-		if (Auth::check() && Auth::user()->id == '1' )
+		if (Auth::check())
 		{ 
 
                 $cart_T_list    = explode(',', $request-> input('finalyCartlist'));

@@ -28,7 +28,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-		if (Auth::check() && Auth::user()->id == '1' )
+		if (Auth::check())
 		{  
 
         $test = ProductsCRUD::orderBy('sku','desc')->paginate(6);
@@ -52,7 +52,7 @@ class ProductsController extends Controller
     public function cartCnt(Request $request)
     {
 
-		if (Auth::check() && Auth::user()->id == '1' )
+		if (Auth::check())
 		{         
 
         $totalCnt = DB::table('cart_tab')
@@ -74,7 +74,7 @@ class ProductsController extends Controller
     public function addCart(Request $request)
 	{
 
-		if (Auth::check() && Auth::user()->id == '1' )
+		if (Auth::check())
 		{         
                 // dd('test'.$request['sku']);
 
