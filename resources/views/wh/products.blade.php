@@ -113,10 +113,10 @@
           @php
           $SLen = strlen($column->description);
           @endphp
-          {{ \Illuminate\Support\Str::substr($column->description,0,46) }}  
-          @if( $SLen > 46 )
-          <i class="bx bx-comment-add" data-bs-toggle="modal" data-bs-target="#smallModal" style="color: red;"></i>
-          <div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true" style="display: none;">
+          {{ \Illuminate\Support\Str::substr($column->description,0,40) }}  
+          @if( $SLen > 40 )
+          <i class="bx bx-comment-add" data-bs-toggle="modal" data-bs-target="#smallModal_{{$column->sku}}" style="color: red;"></i>
+          <div class="modal fade" id="smallModal_{{$column->sku}}" tabindex="-1" aria-hidden="true" style="display: none;">
           <div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header">
             <h3 class="modal-title">Description</h3> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
             <div class="modal-body"><h5>{{$column->name}}</h5> <br> {{$column->description}}</div><div class="modal-footer"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> 
