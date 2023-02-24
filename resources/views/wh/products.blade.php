@@ -115,7 +115,7 @@
           @endphp
           {{ \Illuminate\Support\Str::substr($column->description,0,46) }}  
           @if( $SLen > 46 )
-          <span data-bs-toggle="modal" data-bs-target="#smallModal" >... </span>     
+          <i class="bx bx-comment-add" data-bs-toggle="modal" data-bs-target="#smallModal" style="color: red;"></i>
           <div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true" style="display: none;">
           <div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header">
             <h3 class="modal-title">Description</h3> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
