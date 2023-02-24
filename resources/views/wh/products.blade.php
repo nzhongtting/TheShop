@@ -109,14 +109,18 @@
             <h4>{{$column->name}}</h4>
             <p class="price">${{$column->amount}}</p>
           </div>
-
           <p>
           @php
           $SLen = strlen($column->description);
           @endphp
-          {{ \Illuminate\Support\Str::substr($column->description,0,52) }}  
-          @if( $SLen > 50 )
-          <span class="moretip" data-bs-toggle="modal" data-bs-target="#smallModal" >...   <span class="tip">{{$column->description}}</span></span>     
+          {{ \Illuminate\Support\Str::substr($column->description,0,46) }}  
+          @if( $SLen > 46 )
+          <span data-bs-toggle="modal" data-bs-target="#smallModal" >... </span>     
+          <div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true" style="display: none;">
+          <div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header">
+            <h3 class="modal-title">Description</h3> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <div class="modal-body"><h5>{{$column->name}}</h5> <br> {{$column->description}}</div><div class="modal-footer"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> 
+            </div></div></div></div>          
           @else
           @endif
           </p>
