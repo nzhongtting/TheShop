@@ -114,7 +114,7 @@
           @php
           $SLen = strlen($column->description);
           @endphp
-          {{ \Illuminate\Support\Str::substr($column->description,0,50) }}  
+          {{ \Illuminate\Support\Str::substr($column->description,0,52) }}  
           @if( $SLen > 50 )
           <span class="moretip" data-bs-toggle="modal" data-bs-target="#smallModal" >...   <span class="tip">{{$column->description}}</span></span>     
           @else
