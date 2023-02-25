@@ -48,7 +48,7 @@
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
               <div class="d-flex justify-content-center py-4">
-                <a href="/inwh" class="logo d-flex align-items-center w-auto">
+                <a href="#" class="logo d-flex align-items-center w-auto">
                   <img src="{{ asset('wh/admin/assets/img/logo.png') }}" alt="">
                   <span class="d-none d-lg-block">The Shop Admin</span>
                 </a>
