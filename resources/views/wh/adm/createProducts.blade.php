@@ -13,7 +13,7 @@
 </div><!-- End Page Title -->
 
 <div class="card-body">
-    <form action="{{ route('Product.Insert') }}" id="TableForm" name="TableForm" method="POST">
+    <form action="{{ route('Product.Insert') }}" id="TableForm" name="TableForm" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
         <div class="row mb-3"> 
@@ -29,9 +29,16 @@
                 <input type="number" min="1" step="any" class="form-control" id="pro_price" name="pro_price" >
             </div>
         </div>        
+
+        <div class="row mb-3"> 
+            <label for="inputText" class="col-sm-2 col-form-label">Product Image</label>
+            <div class="col-sm-10"> 
+            <input type="file" name="image" id="image" class="form-control">
+            </div>
+        </div>                
             
         <div class="row mb-3"> 
-            <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
+            <label for="inputText" class="col-sm-2 col-form-label">Description</label>
             <div class="col-sm-10">
                 <textarea class="form-control" style="height: 100px" id="pro_description" name="pro_description" ></textarea>
             </div>

@@ -93,7 +93,12 @@
         @foreach($test as $column)
         <div class="col-lg-4 col-md-6 gallery-item filter-{{$column->title}}">
         <div class="gallery-wrap">
-          <img src="/wh/assets/img/sample_img_red.jpg" class="img-fluid" alt="">
+          
+          @if( $column->image_url )
+          <img src="{{$column->image_url}}" class="img-fluid" alt="">          
+          @else
+          <img src="/wh/assets/img/sample_img_red.jpg" class="img-fluid" alt="">          
+          @endif
           <div class="gallery-info">
             <p>SKU : {{$column->sku}}</p>
 

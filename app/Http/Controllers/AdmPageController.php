@@ -65,20 +65,37 @@ class AdmPageController extends Controller
 
     public function insertProducts(Request $request)
     {
-		if (Auth::check())
-		{
-            $save_table = new ProductsCRUD ;
-            $save_table->name = $request-> input('pro_name');
-            $save_table->amount = $request-> input('pro_price');
-            $save_table->description = $request-> input('pro_description');
-            $save_table->save(); 
+      if (Auth::check())
+      {
 
-            return redirect('/ListProducts');
-		}
-		else
-		{
-		return redirect('/login');
-		}            
+        $urlpath    = "";
+        $imageName  = "";
+
+        if(isset($_FILES['image']) && $_FILES['image']['name'] != "")
+        {
+          $urlpath = "wh/assets/img/product/";
+          $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+          ]);
+          $imageName = time().'.'.$request->image->extension();
+          $request->image->move(public_path($urlpath), $imageName); 
+        }
+        else {}
+                               
+
+          $save_table = new ProductsCRUD ;
+          $save_table->name = $request-> input('pro_name');
+          $save_table->amount = $request-> input('pro_price');
+          $save_table->image_url = $urlpath.$imageName ;
+          $save_table->description = $request-> input('pro_description');
+          $save_table->save(); 
+
+          return redirect('/ListProducts');
+      }
+      else
+      {
+      return redirect('/login');
+      }        
     }
 
     public function productAdmEdit($Id)
@@ -103,9 +120,26 @@ class AdmPageController extends Controller
 		if (Auth::check())
 		{
             $id		= $request-> input('pro_sku');
+
+            $urlpath    = "";
+            $imageName  = "";
+            $sumimgUrl = $request-> input('old_img_url') ;
+
+            if(isset($_FILES['image']) && $_FILES['image']['name'] != "")
+            {
+              $urlpath = "wh/assets/img/product/";
+              $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+              ]);
+              $imageName = time().'.'.$request->image->extension();
+              $request->image->move(public_path($urlpath), $imageName); 
+              $sumimgUrl = $urlpath.$imageName ;              
+            }
+            else {}
+
             $affected = DB::table('products_tab')
             ->where('sku', $id)
-            ->update(['name' => $request-> input('pro_name') , 'amount' => $request-> input('pro_price') , 'description' => $request-> input('pro_description')  , 'updated_at' => now() ]);            
+            ->update(['name' => $request-> input('pro_name') , 'amount' => $request-> input('pro_price') , 'image_url' => $sumimgUrl  , 'description' => $request-> input('pro_description')  , 'updated_at' => now() ]);            
             return redirect('/ListProducts');
         }
         else
