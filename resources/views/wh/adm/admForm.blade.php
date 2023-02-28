@@ -105,19 +105,34 @@
       </li><!-- End Dashboard Nav -->
 
 
-      <li class="nav-item">
-        <a class="nav-link @if($uri =='ListProducts') {} @else{ collapsed } @endif" href="/ListProducts">
-          <i class="bi bi-card-image"></i>
-          <span>LIST PRODUCT</span>
+      <li class="nav-item"> 
+        <a class="nav-link @if($uri =='ListProducts') {} @else{ collapsed } @endif" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#" aria-expanded="true"> 
+        <i class="bi bi-gem"></i>
+          <span>Products</span>
+        <i class="bi bi-chevron-down ms-auto"></i> 
         </a>
-      </li><!-- End Profile Page Nav -->
+          <ul id="icons-nav" class="nav-content collapse @if($uri =='ListProducts') { show } @else{ } @endif" data-bs-parent="#sidebar-nav" style="">
+            <li> 
+            <a href="/ListProducts" @if($uri =='ListProducts') { class="active" } @else{ } @endif > 
+            <i class="bi bi-circle"></i>
+            <span>List Product</span> </a>
+            </li>
+
+            <li> 
+            <a href="#"> 
+            <i class="bi bi-circle"></i>
+            <span>Category</span> </a>
+            </li>
+
+          </ul>
+      </li> 
 
       <li class="nav-item">
         <a class="nav-link @if($uri =='ListCart') {} @else{ collapsed } @endif" href="/ListCart">
           <i class="bi bi-hand-thumbs-up"></i>
-          <span>LIST CART</span>
+          <span>List Cart</span>
         </a>
-      </li><!-- End Recommend Page Nav -->
+      </li><!-- End CART Page Nav -->
 
     </ul>
 
