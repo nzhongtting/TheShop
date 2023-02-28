@@ -108,14 +108,14 @@
       <li class="nav-item">
         <a class="nav-link @if($uri =='ListProducts') {} @else{ collapsed } @endif" href="/ListProducts">
           <i class="bi bi-card-image"></i>
-          <span>List Product</span>
+          <span>LIST PRODUCT</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link @if($uri =='ListCart') {} @else{ collapsed } @endif" href="/ListCart">
           <i class="bi bi-hand-thumbs-up"></i>
-          <span>List Cart</span>
+          <span>LIST CART</span>
         </a>
       </li><!-- End Recommend Page Nav -->
 
