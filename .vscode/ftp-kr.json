@@ -1,0 +1,16 @@
+{
+    "host": "www.inwhangarei.com",
+    "username": "inwhagarei",
+    "password": "wh1004",
+    "remotePath": "",
+    "protocol": "ftp",
+    "port": 0,
+    "fileNameEncoding": "utf8",
+    "autoUpload": true,
+    "autoDelete": false,
+    "autoDownload": false,
+    "ignore": [
+        ".git",
+        "/.vscode"
+    ]
+}
