@@ -105,7 +105,6 @@
       </li><!-- End Dashboard Nav -->
 
 
-
       <li class="nav-item">
         <a class="nav-link @if($uri =='ListProducts') {} @else{ collapsed } @endif" href="/ListProducts">
           <i class="bi bi-card-image"></i>
