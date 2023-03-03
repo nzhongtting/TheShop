@@ -106,7 +106,14 @@
             Remove
           </button>        
       </td>
-      <td class="product-line-price">{{$column->amount * $column->quantity}}</td>
+      @php
+      // Apply a 20% discount when ordering 2 or more - by Thomas Hong
+        $amount = 0 ;
+        if($column->quantity >=2) { $amount = $column->amount - ( $column->amount * 0.2 ) ; }
+        else { $amount = $column->amount; }
+      @endphp
+
+      <td class="product-line-price">{{number_format($amount * $column->quantity,2)}}</td>
     </tr>
     @endforeach
     @else
@@ -175,7 +182,7 @@
 </main><!-- End #main -->
 
 @include('wh.theshop_footer')  
-<script src="{{ asset('wh/assets/js/cart.js') }}"></script>
+<script src="{{ asset('wh/assets/js/cart.js?var=03032023') }}"></script>
 <script>
     $( document ).ready(function() {
     recalculateCart();

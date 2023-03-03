@@ -59,7 +59,17 @@ function updateQuantity(quantityInput)
   var productRow = $(quantityInput).parent().parent();
   var price = parseFloat(productRow.children('.product-price').text());
   var quantity = $(quantityInput).val();
-  var linePrice = price * quantity;
+
+  // Apply a 20% discount when ordering 2 or more - by Thomas Hong
+  var linePrice = 0 ;  
+  if( quantity >= 2 ) 
+  {  
+    linePrice = (price - (price * 0.2)) * quantity;
+  }
+  else
+  {
+    linePrice = price * quantity;
+  }
   
   /* Update line price display and recalc cart totals */
   productRow.children('.product-line-price').each(function () {
@@ -68,7 +78,7 @@ function updateQuantity(quantityInput)
       recalculateCart();
       $(this).fadeIn(fadeTime);
     });
-  });  
+  });
 }
 
 
