@@ -8,7 +8,7 @@
   <title>Dashboard - The Shop Admin</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Favicons -->
   <link href="{{ asset('wh/admin/assets/img/favicon.png') }}" rel="icon">
   <link href="{{ asset('wh/admin/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -28,7 +28,8 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('wh/admin/assets/css/style.css') }}" rel="stylesheet">
-   
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.2.2
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -106,12 +107,12 @@
 
 
       <li class="nav-item"> 
-        <a class="nav-link @if($uri =='ListProducts') {} @else{ collapsed } @endif" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#" aria-expanded="true"> 
+        <a class="nav-link @if($uri =='ListProducts'  || $uri =='ListCategory' ) {} @else{ collapsed } @endif" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#" aria-expanded="true"> 
         <i class="bi bi-gem"></i>
           <span>Products</span>
         <i class="bi bi-chevron-down ms-auto"></i> 
         </a>
-          <ul id="icons-nav" class="nav-content collapse @if($uri =='ListProducts') { show } @else{ } @endif" data-bs-parent="#sidebar-nav" style="">
+          <ul id="icons-nav" class="nav-content collapse @if($uri =='ListProducts' || $uri =='ListCategory' ) { show } @else{ } @endif" data-bs-parent="#sidebar-nav" style="">
             <li> 
             <a href="/ListProducts" @if($uri =='ListProducts') { class="active" } @else{ } @endif > 
             <i class="bi bi-circle"></i>
@@ -119,9 +120,9 @@
             </li>
 
             <li> 
-            <a href="#"> 
+            <a href="/ListCategory" @if($uri =='ListCategory') { class="active" } @else{ } @endif > 
             <i class="bi bi-circle"></i>
-            <span>Category</span> </a>
+            <span>List Category</span> </a>
             </li>
 
           </ul>
@@ -168,7 +169,6 @@
   <script src="{{ asset('wh/admin/assets/vendor/tinymce/tinymce.min.js') }}"></script>
   <script src="{{ asset('wh/admin/assets/vendor/php-email-form/validate.js') }}"></script>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="{{ asset('wh/admin/assets/js/main.js') }}"></script>
