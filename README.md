@@ -1,6 +1,10 @@
 # TheShop
 Coding Challenge
 
+# Mar 12, 2023, 7:41 GMT+13<br>
+ADD,Modify - category in product at Admin page
+
+
 1.Test: Works fine in Chrome and Microsoft Edge browser. <br>
 2.Excludes the “Login” part and HTML template for design.<br>
 3.See below for installing the Laravel “Login” part.<br>
