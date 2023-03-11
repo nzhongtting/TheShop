@@ -41,8 +41,45 @@ class AdmPageController extends Controller
     {
       if (Auth::check())
       {
+
               $test = ProductsCRUD::orderBy('sku','desc')->paginate(10);
               $uri = $request->path();
+
+              $categoryname1 = "";
+              $categoryname2 = "";
+              $categorylevel = "";
+              foreach($test as $column)
+              {   
+                  $categoryinfo = DB::table('theshopcategory_tab')->where('code', $column->category_code)->first();
+                  
+                  $categoryname1  = $categoryinfo->name;
+                  $categorylevel  = $categoryinfo->level ;
+                  $column->category_name = $categoryname1 ;
+                  $column->category_level = $categorylevel ; 
+
+                  if($categoryinfo->level == 3)
+                  {
+                    $cut1 = substr($categoryinfo->code,0,2)."000000";
+                    $cut2 = substr($categoryinfo->code,0,5)."000";
+                    $cut1name = DB::table('theshopcategory_tab')->where('code', $cut1)->pluck('name');
+                    $cut2name = DB::table('theshopcategory_tab')->where('code', $cut2)->pluck('name');
+                    
+                    $categoryname2 = " < ".$cut2name[0]." < ".$cut1name[0] ;
+                  }
+                  else if($categoryinfo->level == 2)
+                  {
+                    $cut1 = substr($categoryinfo->code,0,2)."000000";
+                    $cut1name = DB::table('theshopcategory_tab')->where('code', $cut1)->pluck('name');
+  
+                    $categoryname2 = " < ".$cut1name[0] ;
+                  }
+                  else
+                  {
+                    $categoryname2 ="";
+                  }
+                  $column->upper = $categoryname2 ;
+              }              
+
               return view('wh.adm.listProducts',compact('test','uri'));
       }
       else
@@ -56,6 +93,8 @@ class AdmPageController extends Controller
       if (Auth::check())
       {
               $uri = 'ListProducts';
+
+              $test = TheshopCategoryCRUD::where('level', '1')->orderBy('id','desc')->get();
               return view('wh.adm.createProducts',compact('test','uri'));
       }
       else
@@ -82,12 +121,26 @@ class AdmPageController extends Controller
           $request->image->move(public_path($urlpath), $imageName); 
         }
         else {}
-                               
+
+        $category_code = "";
+        if( $request-> input('level3') && $request-> input('level2') && $request-> input('level1') )
+        {
+          $category_code = $request-> input('level3');
+        }
+        else if( $request-> input('level3') =='' && $request-> input('level2') && $request-> input('level1') )
+        {
+          $category_code = $request-> input('level2');
+        }
+        else if( $request-> input('level3') =='' && $request-> input('level2') =='' && $request-> input('level1') )
+        {
+          $category_code = $request-> input('level1');
+        }
 
           $save_table = new ProductsCRUD ;
           $save_table->name = $request-> input('pro_name');
           $save_table->amount = $request-> input('pro_price');
           $save_table->image_url = $urlpath.$imageName ;
+          $save_table->category_code = $category_code ;
           $save_table->description = $request-> input('pro_description');
           $save_table->save(); 
 
@@ -106,9 +159,28 @@ class AdmPageController extends Controller
 		{
 
 			$test = ProductsCRUD::where('sku', $Id)->firstOrFail();
+      $test->catCut1 = SUBSTR($test->category_code, 0, 2)."000000" ; 
+      $test->catCut2 = SUBSTR($test->category_code, 0, 5)."000" ;
+      $test->catCut3 = $test->category_code ;
+
+      if ( substr($test->category_code,-6) == "000000" )
+      {
+        $test->till = "1level";
+      }
+      else if( substr($test->category_code,-3) == "000" )
+      {
+        $test->till = "2level";
+      }
+      else
+      {  
+        $test->till = "3level";
+      }
+
+      $category = TheshopCategoryCRUD::where('level', '1')->orderBy('id','desc')->get();
+
 			$uri = 'ListProducts';
 
-			return view('wh.adm.productAdmEdit', compact('test','uri'));
+			return view('wh.adm.productAdmEdit', compact('test','category','uri'));
 		}
 		else
 		{
@@ -138,9 +210,23 @@ class AdmPageController extends Controller
             }
             else {}
 
+            $category_code = "";
+            if( $request-> input('level3') && $request-> input('level2') && $request-> input('level1') )
+            {
+              $category_code = $request-> input('level3');
+            }
+            else if( $request-> input('level3') =='' && $request-> input('level2') && $request-> input('level1') )
+            {
+              $category_code = $request-> input('level2');
+            }
+            else if( $request-> input('level3') =='' && $request-> input('level2') =='' && $request-> input('level1') )
+            {
+              $category_code = $request-> input('level1');
+            }            
+
             $affected = DB::table('products_tab')
             ->where('sku', $id)
-            ->update(['name' => $request-> input('pro_name') , 'amount' => $request-> input('pro_price') , 'image_url' => $sumimgUrl  , 'description' => $request-> input('pro_description')  , 'updated_at' => now() ]);            
+            ->update(['name' => $request-> input('pro_name') , 'amount' => $request-> input('pro_price') , 'image_url' => $sumimgUrl  , 'category_code' => $category_code , 'description' => $request-> input('pro_description')  , 'updated_at' => now() ]);            
             return redirect('/ListProducts');
         }
         else

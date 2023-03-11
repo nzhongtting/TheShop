@@ -22,8 +22,8 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">updated</th>
+                    <th scope="col">update</th>
+                    <th scope="col">Category</th>
 					<th scope="col">sku</th>
                     <th scope="col">name</th>
                     <th scope="col">price</th>
@@ -34,8 +34,8 @@
 
     @foreach($test as $column)
                   <tr>
-                    <th scope="row" align=center></th>
-                    <td>{{$column->updated_at}}</td>
+                    <th scope="row" align=center>{{$column->updated_at}}</th>
+                    <td>{{$column->category_name}} {{$column->upper}}</td>
                     <td>{{$column->sku}}</td>
                     <td><a href="{{ route('Product.Edit', $column->sku)}}">{{$column->name}}</a></td>
                     <td>{{$column->amount}}</td>
