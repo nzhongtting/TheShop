@@ -3,7 +3,7 @@ Coding Challenge
 
 # Mar 12, 2023, 7:41 GMT+13<br>
 ADD,Modify - category in product at Admin page
-
+![Dashboard-The-Shop-Admin](https://user-images.githubusercontent.com/34477830/224506314-8a9ece36-b9ca-4fc2-820d-61dbdb2575b4.png)
 
 1.Test: Works fine in Chrome and Microsoft Edge browser. <br>
 2.Excludes the “Login” part and HTML template for design.<br>
